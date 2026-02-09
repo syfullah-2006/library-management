@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>👨‍🏫 Librarian Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card p-3 mb-3">
+            <h5>➕ Add New Book</h5>
+            <form action="/add_book" method="POST">
+                <input type="text" name="book_id" class="form-control mb-2" placeholder="Book ID" required>
+                <input type="text" name="title" class="form-control mb-2" placeholder="Title" required>
+                <input type="text" name="author" class="form-control mb-2" placeholder="Author" required>
+                <button type="submit" class="btn btn-primary w-100">Add Book</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3 mb-3">
+            <h5>📤 Issue Book</h5>
+            <form action="/issue_book" method="POST">
+                <input type="text" name="book_id" class="form-control mb-2" placeholder="Book ID" required>
+                <input type="text" name="student_name" class="form-control mb-2" placeholder="Student Name" required>
+                <button type="submit" class="btn btn-warning w-100">Issue Book</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3 mb-3">
+            <h5>📥 Return Book</h5>
+            <form action="/return_book" method="POST">
+                <input type="text" name="book_id" class="form-control mb-2" placeholder="Book ID" required>
+                <button type="submit" class="btn btn-success w-100">Return Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">📋 Inventory & Status</h3>
+<table class="table table-bordered bg-white">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Status</th>
+            <th>Issued To</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.BookID }}</td>
+            <td>{{ book.Title }}</td>
+            <td>{{ book.Author }}</td>
+            <td>{{ book.Status }}</td>
+            <td>{{ book.IssuedTo }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
